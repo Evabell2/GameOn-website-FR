@@ -29,96 +29,111 @@ function editNav() {
   }
 //#endregion TODO : fermer la modale
 
-//#region Implémenter entrées du formulaire
-  const formData = document.querySelectorAll(".formData");
-  const form = document.getElementById ("form");
 
-  const first = document.getElementById("first");
-  const last = document.getElementById("last");
-  const email = document.getElementById("email");
-  const birthdate = document.getElementById("birthdate");
-  const quantity = document.getElementById("quantity");
+// const formData = document.querySelectorAll(".formData");
+// const form = document.getElementById ("form");
+  
+// #region message de validation
+  // const messageValidation = document.getElementById("message_validation");
+  // const isvalid = validate();
 
-  const loc1 = document.getElementById ('location1');
-  const loc2 = document.getElementById ('location2');
-  const loc3 = document.getElementById ('location3');
-  const loc4 = document.getElementById ('location4');
-  const loc5 = document.getElementById ('location5');
-  const loc6 = document.getElementById ('location6');
+  // document.getElementById("envoyer").addEventListener('click', function() {
+  //   // if (isvalid === true) {
+  //     messageValidation.innerHTML = "Merci ! Votre réservation a été reçue."
+  //   // }
+  // })
+// #endregion message de validation
 
+
+document.getElementById("envoyer").addEventListener('click', function validate () {
+  
+  // PRENOM
+  const prenom = document.getElementById("first");
+  const prenom_m = document.getElementById("prenom_erreur");
+
+  if (prenom.value === '' || prenom.value.length< 2) { 
+    prenom_m.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+    e.preventDefault();
+  }
+  else {
+    prenom_m.textContent = "";
+  }
+
+  // NOM
+  const nom = document.getElementById("last");
+  const nom_m = document.getElementById("nom_erreur");
+
+  if (nom.value === '' || nom.value.length< 2) { 
+    nom_m.textContent = "Veuillez entrer 2 caractères ou plus pour le champ du prénom.";
+    e.preventDefault();
+  }
+  else {
+    nom_m.textContent = "";
+  }
+
+  // MAIL
+  const email =  document.getElementById("email");
+  const email_m = document.getElementById("email_erreur");
+  var mailCaractere = /^([a-z0-9_\.-]+\@[\da-z\.-]+\.[a-z\.]{2,6})$/;
+
+  if(mailCaractere.test(email.value)){
+    email_m.textContent = "";
+  }
+  else {
+    email_m.textContent =" Veuillez entrer un email correct";
+    e.preventDefault();
+  }
+
+  // NAISSANCE
+  const naissance = document.getElementById("birthdate");
+  const naissance_m = document.getElementById("birthdate_erreur");
+
+  if (naissance.value ==='') {
+    naissance_m.textContent= "Veuillez entrez votre date de naissance";
+    e.preventDefault();
+  }
+  else {
+    naissance_m.textContent = "";
+  }
+
+  // NOMBRE DE TOURNOIS
+  const nombreTournois = document.getElementById("quantity");
+  const nombreTournois_m = document.getElementById("quantity_erreur");
+
+  if (nombreTournois.value === '') {
+    nombreTournois_m.textContent = "Veuillez entrer le nombre de tournois participé";
+    e.preventDefault();
+  }
+  else {
+    nombreTournois_m.textContent = "";
+  }
+
+  // SELECTION VILLE
+  const location1 = document.getElementById("location1");
+  const location2 =  document.getElementById("location2");
+  const location3 =  document.getElementById("location3");
+  const location4 =  document.getElementById("location4");
+  const location5 =  document.getElementById("location5");
+  const location6 =  document.getElementById("location6");
+  const location_m = document.getElementById("location_manquant");
+
+  if ((location1.checked)|| (location2.checked) || (location3.checked) ||(location4.checked) ||(location5.checked) ||(location6.checked)) {
+    location_m.textContent = "";
+  }
+  else {
+    location_m.textContent = "Vous devez choisir une option";
+    e.preventDefault();
+  }
+
+  // CONDITIONS A COCHER
   const checkbox1 = document.getElementById("checkbox1");
-  const checkbox2 = document.getElementById("checkbox2");
+  const condition_m = document.getElementById("condition_erreur");
 
-  function validate() {
-    // Prénom
-    if (first.length < 2) {
-      displayErrorFeedback(
-        firstInput,
-        "Veuillez entrer 2 caractères ou plus pour le champ du prénom."
-      );
-      return false;
-    }
-    // Nom
-    if (last.length < 2) {
-      displayErrorFeedback(
-        lastInput,
-        "Veuillez entrer votre nom."
-      );
-      return false;
-    }
-    // Mail
-    if (!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
-      displayErrorFeedback(
-        emailInput,
-        "Veuillez saisir une adresse email valide."
-      );
-      return false;
-    }
-    // Date de naissance
-    const dateTime = new Date(birthdate).getTime();
-    if (isNaN(dateTime)) {
-      displayErrorFeedback(
-        birthdateInput,
-        "Veuillez entrer votre date de naissance."
-      );
-      return false;
-    }
-    // Ville tournois
-    if (isNaN(new Number(quantity)) || quantity === "") {
-      displayErrorFeedback(
-        quantityInput, 
-        "Vous devez entrer un nombre."
-        );
-      return false;
-    }
-    // Nombre de tournois
-    if (location === null) {
-      displayErrorFeedback(
-        cityOptions,
-        "Vous devez choisir une option."
-        );
-      return false;
-    }
-    // Case à cocher
-    if (!checkboxConditions.checked) {
-      displayErrorFeedback(
-        checkboxWarning,
-        "Vous devez vérifier que vous acceptez les termes et conditions."
-      );
-      return false;
-    }
-  
-    return true;
+  if(checkbox1.checked) {
+    condition_m = "";
   }
-  
-  form.onsubmit = (event) => {
-    const isValid = validate();
-    if (isValid === true) {
-      console.log("Merci ! Votre réservation a été reçue.")
-    }
+  else {
+    condition_m.textContent ="Vous devez vérifier que vous acceptez les termes et conditions";
+    e.preventDefault();
   }
-  document.getElementById("C\'est parti").addEventListener('submit', function() {
-    alert("C'est envoyé !")
-  })
-
-//#endregion Implémenter entrées du formulaire
+})
