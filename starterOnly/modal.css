@@ -538,11 +538,14 @@ footer {
 
 /* input:focus:invalid {
   border: 2px solid red;
-}
-input:focus:valid {
-  border: 2px solid green;
 } */
-
+/* input:focus:valid {
+  border: 2px solid green;
+}
+input:invalid{
+  border-color: #900;
+  background-color: #FDD;
+} */
 .style_erreur {
   display: block;
   padding: 0 0 5px 0;
