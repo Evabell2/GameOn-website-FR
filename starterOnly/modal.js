@@ -1,4 +1,3 @@
-
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
@@ -27,31 +26,16 @@ function launchModal() {
 // close modal form
 function closeModal() {
   modalbg.style.display = "none";
+  location.reload();
 }
 //#endregion TODO : fermer la modale
-
-
-// const formData = document.querySelectorAll(".formData");
-// const form = document.getElementById ("form");
-
-// #region message de validation
-// const messageValidation = document.getElementById("message_validation");
-// const isvalid = validate();
-
-// document.getElementById("envoyer").addEventListener('click', function() {
-//   // if (isvalid === true) {
-//     messageValidation.innerHTML = "Merci ! Votre réservation a été reçue."
-//   // }
-// })
-// #endregion message de validation
-
 
 document.getElementById("envoyer").addEventListener('click', (event) => {
 
   event.preventDefault();
-
-  if (true || validateForm()) {
-    document.getElementById("modalBody").innerHTML = `test <br><br><p class="">ddd</p>`;
+// todo enlever true  ||
+  if (true  || validateForm())  {
+    document.getElementById("modalBody").innerHTML = `<p class="return_message">Merci, votre réservation a été reçue avec succès !</p> `; 
   }
 })
 
@@ -140,7 +124,7 @@ function validateForm() {
   const condition_m = document.getElementById("condition_erreur");
 
   if (checkbox1.checked) {
-    condition_m = "";
+    condition_m.textContent = "";
   }
   else {
     condition_m.textContent = "Vous devez vérifier que vous acceptez les termes et conditions";
