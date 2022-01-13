@@ -34,7 +34,7 @@ document.getElementById("envoyer").addEventListener('click', (event) => {
 
   event.preventDefault();
 // todo enlever true  ||
-  if (true  || validateForm())  {
+  if (validateForm())  {
     document.getElementById("modalBody").innerHTML = `<p class="return_message">Merci, votre réservation a été reçue avec succès !</p> `; 
   }
 })
